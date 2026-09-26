@@ -61,3 +61,21 @@ docker-compose exec mysql mysql -u dev_user -p my_database
 
 ## 📁 Збереження даних
 Усі дані бази автоматично зберігаються в іменованому томі `mysql_data`. Створені таблиці, схеми та записи не видаляються при перезавантаженні системи або зупинці контейнерів.
+
+---
+
+## 🚕 Схема бази даних (Сервіс таксі)
+
+У директорії `sql/` знаходяться DDL-скрипти для створення структури бази даних:
+
+* `sql/01_create_table_street.sql` — створення таблиці вулиць (`street`).
+* `sql/02_create_table_house.sql` — створення таблиці будинків (`house`) з геокоординатами та зовнішнім ключем на `street`.
+* `sql/rollback/drop_tables.sql` — скрипт видалення таблиць у коректному порядку (спочатку дочірня `house`, потім батьківська `street`).
+* `sql/seed/sample_data.sql` — тестові дані для перевірки зв'язків.
+
+### Ручне застосування DDL-скриптів:
+```bash
+docker-compose exec -T mysql mysql -u dev_user -pdevpassword my_database < sql/01_create_table_street.sql
+docker-compose exec -T mysql mysql -u dev_user -pdevpassword my_database < sql/02_create_table_house.sql
+```
+*(При першому запуску з чистим томом скрипти з папки `sql/` застосовуються автоматично завдяки монтуванню в `/docker-entrypoint-initdb.d`)*

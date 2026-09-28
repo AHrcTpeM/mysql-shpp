@@ -1,8 +1,16 @@
-INSERT INTO street (name, street_type, city) VALUES
-('Хрещатик', 'вулиця', 'Київ'),
-('Володимирська', 'вулиця', 'Київ'),
-('Перемоги', 'проспект', 'Київ'),
-('Лесі Українки', 'бульвар', 'Київ');
+INSERT INTO city (name) VALUES
+('Київ');
+
+INSERT INTO street_type (name) VALUES
+('вулиця'),
+('проспект'),
+('бульвар');
+
+INSERT INTO street (city_id, street_type_id, name) VALUES
+(1, 1, 'Хрещатик'),
+(1, 1, 'Володимирська'),
+(1, 2, 'Перемоги'),
+(1, 3, 'Лесі Українки');
 
 INSERT INTO house (street_id, house_number, building, latitude, longitude, postal_code) VALUES
 (1, '1', NULL, 50.45010000, 30.52340000, '01001'),

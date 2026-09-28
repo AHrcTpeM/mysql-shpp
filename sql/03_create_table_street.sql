@@ -1,0 +1,18 @@
+CREATE TABLE IF NOT EXISTS street (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    city_id BIGINT UNSIGNED NOT NULL,
+    street_type_id INT UNSIGNED NOT NULL,
+    name VARCHAR(150) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_street_city
+        FOREIGN KEY (city_id)
+        REFERENCES city (id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+    CONSTRAINT fk_street_street_type
+        FOREIGN KEY (street_type_id)
+        REFERENCES street_type (id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);

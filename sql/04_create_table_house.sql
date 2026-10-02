@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS house (
     postal_code VARCHAR(20) DEFAULT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_house_street_number (street_id, house_number),
     CONSTRAINT fk_house_street
         FOREIGN KEY (street_id)
         REFERENCES street (id)

@@ -5,6 +5,8 @@ CREATE TABLE IF NOT EXISTS street (
     name VARCHAR(150) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT uq_street_city_type_name UNIQUE (city_id, street_type_id, name),
+    INDEX idx_street_name (name),
     CONSTRAINT fk_street_city
         FOREIGN KEY (city_id)
         REFERENCES city (id)
